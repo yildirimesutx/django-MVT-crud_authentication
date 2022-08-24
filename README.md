@@ -48,6 +48,85 @@ DATABASES = {
     }
 }
 
+-----------------------------------------------------------
+
+#!  Template oluşturulması 
+
+
+- base.html : html yapyı üzerine oturtduğumuz yer,
+  - projede kullanılacak ana html yapısı
+  - body kısmında {% block container %} yapısı tanımlıyoruz
+  - proje sayfamızdaki navbar, footer gibi değişmeyen yapıları direk alıyoruz, örneğin register/new post/detail gibi sayfalarımız var. onları block container içerisine tanımlıyoruz.
+  - register.html içinde {% extends 'student/base.html' %} ilgili base.html çağırdık 
+
+
+#! form.py oluşturulması  
+
+
+- Model yapımızda oluşurduğumuz tabloyu client a form ile sunduğumuzda kullanılıyor.
+
+- Form iki türlü oluşturulabilir bir kendimiz fieldlarını yazarız, modelden bağımsız olur, 
+- diğeri modelimiz import ederiz ve model field larının hepsi yada istenilenleri kullanılır.
+- formu kendimiz oluşturduğumuzda db tanıtma işlemlerinde de ek kodyazılması gerekir
+
+
+```
+--forms.py
+from django import forms
+from .models import Student
+
+
+class StudentForm(forms.ModelForm):
+     class Meta:
+        model = Student
+        fields = "__all__"
+
+
+
+---views.py
+def student(request):
+
+    form = StudentForm()
+    context = {
+      "form": form
+   }
+
+
+    return render(request, "student/student.html", context)
+
+
+---student.html
+{% extends 'student/base.html' %}
+
+{% block container %}
+
+<form action="" method="POST" enctype="multipart/form-data">
+    
+    {% csrf_token %}
+    {{ form.as_p}}
+    <input type="submit" value="OK"/>
+
+</form>
+    
+{% endblock container %}
+
+
+--buradaki enctype="multipart/form-data"  form içinde media istenildiği zaman
+
+-- burada csrf token formun içine eklenmesli, gönderilen formdaki bilgileri güvenliğinin alınması maksadıyla
+
+
+```
+
+- print(request.POST) views içinde post sorgusu 
+
+
+    
+
+
+
+
+
 
 #! virtualenv kurulumu
 # Macos => python3 -m venv env
