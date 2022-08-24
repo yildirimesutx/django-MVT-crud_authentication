@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .forms import StudentForm
 
 # Create your views here.
@@ -10,7 +10,12 @@ def new(request):
 
 def student(request):
     print(request.POST)
-    form = StudentForm()
+
+    form = StudentForm(request.POST or None)
+
+    if form.is_valid():
+        form.save()
+        return redirect("news")
     context = {
       "form": form
    }
