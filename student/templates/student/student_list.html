@@ -1,0 +1,25 @@
+{% extends 'student/base.html' %}
+
+
+{% block container %}
+<h1>Student List</h1> 
+<ul>
+{% for i in student %}
+<li>
+{{ i.first_name }} - {{ i.number }}
+<a href="{% url 'update' i.id %} ">
+    <button type="button" class="btn btn-primary">EDİT</button>
+    </a> 
+   
+</li>
+<br>
+{% endfor %}
+</ul>     
+
+<a href="{% url 'add' %} ">
+    <button type="button" class="btn btn-primary">Add</button>
+    </a>
+
+
+{% endblock container %}
+    

@@ -1,0 +1,19 @@
+{% extends 'student/base.html' %}
+
+
+
+{% block container %}
+<h1>Student Update</h1> 
+
+{% load crispy_forms_tags %} 
+
+<form class="form_add" action="" method="POST" enctype="multipart/form-data" >
+
+{% csrf_token %}
+{% comment %} {{ form.as_p }} {% endcomment %}
+{{ form | crispy }}
+<br>
+
+<button type="submit" class="btn btn-primary">UPDATE</button>
+</form>
+{% endblock container %}
