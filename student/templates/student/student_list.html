@@ -8,7 +8,11 @@
 <li>
 {{ i.first_name }} - {{ i.number }}
 <a href="{% url 'update' i.id %} ">
-    <button type="button" class="btn btn-primary">EDİT</button>
+    <button type="button" class="btn btn-primary">EDIT</button>
+    </a> 
+
+    <a href="{% url 'delete' i.id %} ">
+        <button type="button" class="btn btn-danger">DELETE</button>
     </a> 
    
 </li>

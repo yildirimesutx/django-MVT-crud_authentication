@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from .forms import StudentForm
 from .models import Student
+from django.contrib import messages
 
 # Create your views here.
 
@@ -84,6 +85,17 @@ def student_update(request, id):
 
 # Delete (POST) 
 
+
+def student_delete(request, id):
+    student = Student.objects.get(id=id)
+
+    if request.method == "POST":
+        student.delete()
+
+        messages.success(request, "Student deleted successfully")
+        return redirect("list")
+
+    return render(request, "student/student_delete.html")    
 
 
 

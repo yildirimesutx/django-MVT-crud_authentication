@@ -1,0 +1,22 @@
+{% extends 'student/base.html' %}
+
+
+
+{% block container %}
+    
+<form action="" method="POST">
+    <P>Are You Sure !</P>
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger">YES</button>
+</form>
+
+<a href="{% url 'list' %} ">
+    <button type="button" class="btn btn-primary">NO</button>
+    </a>
+
+
+
+
+
+{% endblock container %}
+    
