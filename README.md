@@ -1,3 +1,23 @@
+# DJANGO MVT-CRUD-AUTHENTICATION 
+
+
+- Bu projemiz içerisinde aşağıda bulunan app bulunmaktadır.
+
+    - app (temel kurulum adımları)
+    - student (CRUD islemleri)
+    - userapp   (AUTH islemleri)
+
+
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
     ***MEDIA YUKLENMESI***
 
 avatar = models.ImageField("resim", upload_to="media/", blank=True, null=True)
@@ -121,8 +141,43 @@ def student(request):
 - print(request.POST) views içinde post sorgusu 
 
 
-    
 
+
+
+
+# AUTH
+
+
+- Djangonun default gelen USER modelini kullanacağız.
+
+- Default gelen USER modelinin attributes leri:
+
+    - username
+    - password
+    - email
+    - first_name
+    - last_name
+
+
+- Django kurulduğunda gelen Auth sistemi, aşağıdaki yapılar default gelmektedir.    
+
+```
+INSTALLED_APPS = [
+    ...
+    'django.contrib.auth',  # Core authentication framework and its default models.
+    'django.contrib.contenttypes',  # Django content type system (allows permissions to be associated with models).
+    ....
+
+MIDDLEWARE = [
+    ...
+    'django.contrib.sessions.middleware.SessionMiddleware',  # Manages sessions across requests
+    ...
+    'django.contrib.auth.middleware.AuthenticationMiddleware',  #  Associates users with requests using sessions.
+    ....
+
+```    
+    
+<img src="DjangoAuthModels.png"  alt="auth_model" width="600"/>
 
 
 
