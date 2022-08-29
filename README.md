@@ -46,8 +46,8 @@ on_delete properties:
 #! SET_DEFAULT - parent silinince default değer atar
 
 
-# Database
-# https://docs.djangoproject.com/en/4.1/ref/settings/#databases
+#! Database
+#1https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 '''
 DATABASES = {
     'default': {
@@ -56,7 +56,7 @@ DATABASES = {
     }
 }
 '''
-# $ pip install psycopg2 # alternative -> $ pip install psycopg2-binary
+#1 $ pip install psycopg2 # alternative -> $ pip install psycopg2-binary
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
@@ -178,6 +178,171 @@ MIDDLEWARE = [
 ```    
     
 <img src="DjangoAuthModels.png"  alt="auth_model" width="600"/>
+
+
+
+
+
+
+- User 3 farklı sekilde oluşturulur,
+   - admin sayfası ile
+   - shell ile
+   - views ile
+
+
+- shell ile 
+
+```
+python manage.py shell
+from django.contrib.auth.models import User
+user2 = User.objects.create_user('john', email='john@mail.com')
+ user2
+ user2.email
+```
+
+
+
+
+- Views ile auth
+
+- https://docs.djangoproject.com/en/4.0/topics/auth/default/#using-the-views-1
+
+
+```
+ana urls.py ekledik,
+
+from django.contrib import admin
+from django.urls import path, include
+
+urlpatterns = [
+    
+    ### And using some urls which Django give us about authentication:
+    path('accounts/', include('django.contrib.auth.urls'))
+]
+
+```
+
+
+- accounts path eklediğimizde default olrak aşapıdaki endpointler gelmektedir.
+
+
+```
+accounts/ login/ [name='login']
+accounts/ logout/ [name='logout']
+accounts/ password_change/ [name='password_change']
+accounts/ password_change/done/ [name='password_change_done']
+accounts/ password_reset/ [name='password_reset']
+accounts/ password_reset/done/ [name='password_reset_done']
+accounts/ reset/<uidb64>/<token>/ [name='password_reset_confirm']
+accounts/ reset/done/ [name='password_reset_complete']
+```
+
+- LOGIN
+
+- yukarıda accounts/ login/ yaptığımızda login.html istedi
+
+- bu html sayfasını dokumanda default olrak faydalanambilmek icin registration/login.html folder, oluşturup icine login.html eklememiz gerekmektedir.
+
+```
+default page 
+
+<h1>Login Page</h1>
+
+
+<form action="" method="POST">
+{% csrf_token %}
+
+{{form.as_p}}
+
+<a href="{% url 'home' %}">
+<input type="submit" value="LOGIN"/>
+</a>
+
+</form>
+
+```
+
+
+
+
+- yukarıdaki islemleri yaptigimizda login olunca default olarak profile sayfasına yönlendiriyor.
+
+- Bu yönlendirmeyi LOGIN_REDIRECT_URL = "home" settings ekleyerek gönlendirme yapıyoruz.
+
+
+
+- REGISTER
+
+
+```
+from django.contrib.auth.forms import UserCreationForm
+
+register olurken login olma aşamasında import ettik
+from django.contrib.auth import authenticate, login
+
+user kaydı oluşturabilmek icin views.py da import ettik
+
+def register(request):
+    form = UserCreationForm()
+    if request.method == "POST":
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect("login")
+    # bu bölüma kadar olan kısımda register islemi tamam bundan sonraki kisim register olduktan sonra login olmak maksadıyla 
+
+    # asagida belirtilen kod bolumu register olurken aynı anda login olabilmesi icin   
+    # cleaned_data bize form yapısı içindeki yazılan ifadeyi çekti, get ile, sayfa yapisini incele dedigimizde p tagi icinde gözükmektedir. username ve password1, import edilecek yapilar unutulmamali         
+            
+           username = form.cleaned_data.get("username")
+           password = form.cleaned_data.get("password1")
+
+
+           user = authenticate(username=username,
+          password=password)
+           login(request, user)
+           return redirect("home") 
+
+
+    context = {
+        "form":form
+        }
+
+    return render(request, "registration/register.html", context)
+
+
+
+
+register.html=>
+
+<h1>Register Page</h1>
+
+
+<form action="" method="POST">
+{% csrf_token %}
+
+{{ form.as_p }}
+
+<input type="submit" value="REGISTER"/>
+
+
+</form>
+
+
+
+```
+
+
+- CHANGE / RESET PASSWORD
+
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+
+
+
+
+
 
 
 
