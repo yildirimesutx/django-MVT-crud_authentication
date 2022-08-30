@@ -335,8 +335,82 @@ register.html=>
 
 - CHANGE / RESET PASSWORD
 
+```
+urls.py=>
+ path('change-password/', auth_views.PasswordChangeView.as_view(template_name='registration/change-password.html'),
+    name='change-password'),
 
+change-password.html =>
+<h1>Password Change Page</h1>
+
+
+<form action="" method='POST'>
+ {% csrf_token %}
+
+ {{form.as_p}}
+
+ <a href="{% url 'home'  %}">
+
+ <input type="submit" value='change'>
+</a>
+</form>
+
+```
+
+```
+urls.py=>
+path('reset-password/', auth_views.PasswordResetView.as_view(template_name='registration/reset-password.html'), name='reset-password'),
+
+settings.py =>
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+reset-password.html =>
+<h1>Password Reset Page</h1>
+
+
+<form action="" method="POST">
+
+    {% csrf_token %}
+    {{ form.as_p }}
+    <br>
+    <input type="submit" value="Reset Password">
+
+</form>
+
+
+terminalden sifirlama bağlantısı gönderiyor
+```
+
+```
+
+ accounts/logout komutu ile ana sayfaya yönlendirmesi için
+
+settings.py
+LOGOUT_REDIRECT_URL = "/"
+```
+
+
+
+- decorators
+
+```
+
+login olunca izin verilecek sayfalar iicin kullandık
+
+
+
+from django.contrib.auth.decorators import login_required
+```
+
+
+
+
+
+
+
+
+
+
 
 
 

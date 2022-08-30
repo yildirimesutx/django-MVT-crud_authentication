@@ -7,12 +7,15 @@ from django.contrib.auth.forms import UserCreationForm
 # register olduktan sonra login olması için 
 from django.contrib.auth import authenticate, login
 
+#decorators icin
+from django.contrib.auth.decorators import login_required
+
 
 
 def home_view(request):
     return render(request, "userapp/home.html")
 
-
+@login_required
 def special(request):
     return render(request, "userapp/special.html")
 
