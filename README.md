@@ -147,6 +147,7 @@ def student(request):
 
 # AUTH
 
+- AUTH-1
 
 - Djangonun default gelen USER modelini kullanacağız.
 
@@ -401,6 +402,29 @@ login olunca izin verilecek sayfalar iicin kullandık
 
 from django.contrib.auth.decorators import login_required
 ```
+
+- AUTH-2
+
+  - bu AUTH-2 de default gelen user tablosunu customize yapacağız
+
+   - default gelen User tablo
+       - username
+       - email
+       - first_name
+       - last_name
+       - password
+       - last_login
+       - date_joined
+       - is_superuser
+       - is_active
+       - is_staff
+
+
+- default gelen tablo dısinda ihtiyacımız olan profile pic, adres, portofolio vb attiributlere ihtiyacımız olduğunda One to One iliski kurularak yeni tabloya bu ihtiyacları yazıyoruz.
+
+
+<img src="auth_customize_user.png"  alt="auth_model" width="600"/>
+
 
 
 
