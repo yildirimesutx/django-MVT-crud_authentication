@@ -428,6 +428,20 @@ from django.contrib.auth.decorators import login_required
 
 
 
+- AUTH-2-2
+
+- Djangonun default gelen User modelini abstraction ile düzenledik, user modelini inherit edip ekstra fieldler düzenledik => abstraction,
+- yukarıda Auth-2 de user model dışında ihtiyac olan fieldları farklı tablo ile alıp birleştirmiştik,
+- bu app de User modeli aldık ve abstraction sayesinde yeni fieldlar tanımladık, ve tek tabloda devam edeceğiz.
+
+- settinds de default user i değiştiriyoruz.
+
+- `AUTH_USER_MODEL = 'users.User'`
+
+- AbstractUser ile User field lar aynı, user modelde olmayan yeni field ekliyoruz, az field ekleuyeceksek bu yöntem daha kolay ve kullanışlı, fieldlar çoğalırsa tablo uzunluğundan dolayı db cevap verme süresi artar
+
+- user modelde kullanıcıdan default olarak username alınıyordu, güncel olarak email adresi kullanıldığından, override ederek emaşl adresi tanımladık.
+
 
 
 

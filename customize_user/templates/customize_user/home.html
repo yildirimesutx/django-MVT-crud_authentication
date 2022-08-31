@@ -1,4 +1,8 @@
-{% extends 'customize_user/base.html' %} {% block content %}
+{% extends 'customize_user/base.html' %} 
+
+
+{% block content %}
+
 <h1>Home Page</h1>
 {% if request.user.is_authenticated %}
 <h2>Wellcome {{request.user}}!</h2>
@@ -8,5 +12,5 @@
 
 {% endif %}
 
-<a class="nav-link" href="{% url 'logout' %}"><code>Logout</code> </a>
+
 {% endblock content %}
