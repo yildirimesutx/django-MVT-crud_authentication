@@ -24,7 +24,7 @@ urlpatterns = [
     path("student/", include("student.urls")),
     path("auth/", include("userapp.urls")),
 
-    path("custom", include("customize_user.urls")),
+    path("custom/", include("customize_user.urls")),
 
     # django auth dan gelen islemler    
     path('accounts/', include('django.contrib.auth.urls'))

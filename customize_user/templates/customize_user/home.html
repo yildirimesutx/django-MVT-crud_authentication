@@ -4,4 +4,9 @@
 <h2>Wellcome {{request.user}}!</h2>
 {% else %}
 <h2>Wellcome Guest!</h2>
-{% endif %} {% endblock content %}
+
+
+{% endif %}
+
+<a class="nav-link" href="{% url 'logout' %}"><code>Logout</code> </a>
+{% endblock content %}
