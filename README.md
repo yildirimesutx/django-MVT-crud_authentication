@@ -5,8 +5,9 @@
 
     - app (temel kurulum adımları)
     - student (CRUD islemleri)
-    - userapp   (AUTH islemleri)
-
+    - userapp   (DJ.User model ile AUTH islemleri)
+    - customize_user (DJ. User model customizEe ek field tanımlama )
+    - base_user (DJ. User modelini polymorphism ederek ek field tanımlama ayrıca defaul gelen username => email adresine cevirme )
 
 
     
