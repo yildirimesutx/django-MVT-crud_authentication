@@ -30,12 +30,14 @@ def register(request):
         #    return redirect("login")
     # bu bölüma kadar olan kısımda register islemi tamam bundan sonraki kisim register olduktan sonra login olmak maksadıyla 
 
-           username = form.cleaned_data.get("username")
-           password = form.cleaned_data.get("password1")
+        #    username = form.cleaned_data.get("username")
+        #    password = form.cleaned_data.get("password1")
 
 
-           user = authenticate(username=username,
-          password=password)
+        #    user = authenticate(username=username,
+        #   password=password)
+
+           user = form.get_user()
            login(request, user)
            return redirect("home") 
 

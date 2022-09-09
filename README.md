@@ -20,7 +20,7 @@
     
     
     ***MEDIA YUKLENMESI***
-
+```
 avatar = models.ImageField("resim", upload_to="media/", blank=True, null=True)
 
 #null db kaydetmiyor, blank boş bırakılabiliyor
@@ -28,6 +28,26 @@ avatar = models.ImageField("resim", upload_to="media/", blank=True, null=True)
 
 python -m pip install Pillow 
 MEDIA_URL = "media/"
+
+media yükleneceği form templateninde 
+
+<form enctype="multipart/form-data"> eklenmesi
+ayrıca yüklenen imagenin gösterilnesi için 
+
+for ile döndüğümüzde 
+
+src="{{i.post_image.url}}" 
+
+i=> for dan gelen
+post_image => modeldeki fields
+url ekleyerek çağırdık
+
+
+urls.py
+from django.conf import settings
+from django.conf.urls.static import static
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+```
 
 # View Static/Media Files: MAIN URLS.PY
 from django.conf import settings
